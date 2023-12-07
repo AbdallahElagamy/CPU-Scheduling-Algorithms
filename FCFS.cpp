@@ -59,14 +59,11 @@ void detectPriorityErrors(Process p[], int len)
     for (int i = 0; i < len; i++)
     {
         int currentPriority = p[i].get_priority();
-        if (currentPriority > len || currentPriority < 0)
+        if (currentPriority < 0)
         {
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
             SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-            if (currentPriority > len)
-                cout << "Invalid Input, the priority of process" << i + 1 << " is greater than " << len << '\n';
-            else
-                cout << "Invalid Input, the priority of process" << i + 1 << " is smaller than 0\n";
+            cout << "Invalid Input, the priority of process" << i + 1 << " is smaller than 0\n";
             SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
             cout << "Hint: Check Note Number 1";
             SetConsoleTextAttribute(hConsole, 7);
@@ -162,8 +159,8 @@ int main()
     SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
     cout << "Notes and Comments: \n";
     SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-    cout << "\t 1- The values of processes' priority have to be from [1,number of processes].\n";
-    cout << "\t 2- The values of processes' arrivaltime and bursttime have to be integers and positives\n";
+    cout << "\t 1- The value of process's priority has to be a positive numbers.\n";
+    cout << "\t 2- The value of process's arrivaltime and bursttime has to be integer and positive number\n";
     cout << "\t 3- If you put a value of any process's priority, then you've to put a value for the remaining.\n";
     cout << "\t 4- If there is no priority and there is multiple tasks with the same arrival time, then the minimmum in burst time will be taken first.\n";
     cout << "\t 5- If there is no priority and there is multiple tasks with the same arrival time and the same burst time, then the first in position will be taken first.\n";
