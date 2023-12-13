@@ -114,20 +114,20 @@ struct FCFS
     }
     void process(Process p[], int len)
     {
-        priority_queue<tuple<pair<int, int>, int, int>, vector<tuple<pair<int, int>, int, int>>, FCFS> waitingQueue;
+        priority_queue<tuple<pair<int, int>, int, int>, vector<tuple<pair<int, int>, int, int>>, FCFS> readyQueue;
         for (int i = 0; i < len; i++)
         {
             int currentArrival = p[i].get_arrival();
             int currentBurst = p[i].get_burst();
             int currentPriority = p[i].get_priority();
             tuple<pair<int, int>, int, int> currentProcess({i, currentArrival}, currentBurst, currentPriority);
-            waitingQueue.push(currentProcess);
+            readyQueue.push(currentProcess);
         }
         int currentExecutionTime = -1;
         cout << "\n\nThe Order of execution: \n";
-        while (waitingQueue.size())
+        while (readyQueue.size())
         {
-            tuple<pair<int, int>, int, int> c = waitingQueue.top();
+            tuple<pair<int, int>, int, int> c = readyQueue.top();
             int processNumber = get<0>(c).first;
             int arrivalTime = get<0>(c).second;
             int burstTime = get<1>(c);
@@ -139,7 +139,7 @@ struct FCFS
             p[processNumber].set_executiontime(currentExecutionTime);
             p[processNumber].calcWaitingtime();
             currentExecutionTime += burstTime;
-            waitingQueue.pop();
+            readyQueue.pop();
         }
         cout << "\nWaiting Time: \n";
         double avg = 0;
