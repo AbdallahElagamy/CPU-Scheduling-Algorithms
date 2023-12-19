@@ -69,13 +69,11 @@ struct FCFS
         vector<int> GantChart;
         while (true) {
             while (!p.empty() && currentTime >= get<0>(*p.begin())) {
-                auto current = *p.begin();
-                auto target = make_tuple(get<1>(current), get<0>(current), get<2>(current));
-                readyQueue.insert(target);
+                readyQueue.insert(*p.begin());
                 p.erase(p.begin());
             }
             auto currentProcess = *readyQueue.begin();
-            int id = get<2>(currentProcess), burstTime = get<0>(currentProcess);
+            int id = get<2>(currentProcess), burstTime = get<1>(currentProcess);
             GantChart.push_back(id);
             original[id].calcWaitingtime(currentTime);
             original[id].calcTurnAroundTime();
@@ -110,6 +108,15 @@ int main()
     int numberOfProcesses;
     cin >> numberOfProcesses;
     vector<Process> p(numberOfProcesses+1);
+    /*
+        Example:
+            5
+            p1 5 0
+            p2 3 1
+            p3 1 2
+            p4 2 3
+            p5 3 4
+    */
     for (int i = 0; i < numberOfProcesses; i++)
     {
         string name;
