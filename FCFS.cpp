@@ -93,7 +93,7 @@ struct FCFS
             cout << "p" << i << ": " << original[i].get_waiting() << '\n';
             avg += original[i].get_waiting();
         }
-        cout << "AverageWaitingTime " << avg / n;
+        cout << "AverageWaitingTime " << avg * 1.0 / n;
         cout << "\n\nResponseTime\n";
         for (int i = 1; i <= n; i++)
             cout << "p" << i << ": " << original[i].get_response() << '\n';
