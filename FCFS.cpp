@@ -48,7 +48,7 @@ public:
     }
     void calcWaitingtime(int currentTime)
     {
-        // Calculate the over all-time the process has taken in the waiting queue
+        // Calculate the over all-time the process has taken in the ready queue
         waitingTime = currentTime - arrivalTime;
         responseTime = waitingTime;
     }
